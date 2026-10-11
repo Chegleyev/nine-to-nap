@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nine to Nap — рабочий полдень</title>
+  <meta name="description" content="A looping cartoon workday in a jungle-overgrown office: a bearded biker, a hippo boss, a very slow sloth." />
+  <style>:root{--bg:#17181c;--panel:#202228;--line:#2d3038;--text:#e8e6e1;--muted:#9a9ca3;--accent:#5aa9ff;--hot:#ffb35a}*{box-sizing:border-box}html,body{background:var(--bg);height:100%;color:var(--text);margin:0;font:14px/1.4 system-ui,Segoe UI,sans-serif}#app{grid-template-columns:1fr 300px;height:100%;display:grid}#stage{min-width:0;position:relative}#view{background:#000;width:100%;height:100%;display:block}#daycard{opacity:0;pointer-events:none;background:radial-gradient(#14281ed1,#050c0af5);justify-content:center;align-items:center;display:none;position:absolute;inset:0}#daycard span{color:#fff4c8;letter-spacing:.02em;text-shadow:0 0 24px #ffc85a8c,0 4px #3a2a10;font:800 clamp(28px,6.5vw,96px) Segoe UI,Arial,sans-serif;transform:rotate(-2deg)}#hud{color:#fff;text-shadow:0 1px 2px #000a;pointer-events:none;font-size:12px;position:absolute;top:10px;left:12px}#panel{background:var(--panel);border-left:1px solid var(--line);flex-direction:column;gap:14px;padding:14px;display:flex;overflow-y:auto}h1{margin:0;font-size:15px;font-weight:600}h2{text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px;font-size:11px;font-weight:600}.clips{grid-template-columns:1fr 1fr;gap:6px;display:grid}button{color:var(--text);border:1px solid var(--line);font:inherit;cursor:pointer;text-align:left;background:#2a2d35;border-radius:6px;padding:7px 8px}button:hover{border-color:#444955}button.on{border-color:var(--accent);background:#24384f}button.wide{grid-column:span 2}.row{align-items:center;gap:6px;display:flex}.row button{text-align:center;flex:1}input[type=range]{width:100%;accent-color:var(--accent)}label.tg{color:var(--text);cursor:pointer;align-items:center;gap:8px;padding:2px 0;display:flex}.muted{color:var(--muted);font-size:12px}kbd{border:1px solid var(--line);background:#2a2d35;border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:11px}#segs{flex-wrap:wrap;gap:4px;display:flex}#segs span{color:var(--muted);background:#2a2d35;border-radius:10px;padding:2px 6px;font-size:11px}#segs span.cur{color:var(--hot);background:#3a2f1f}body.noui #app{grid-template-columns:1fr}body.noui #panel,body.noui #hud{display:none}@media (width<=760px){#app{grid-template-rows:60vh auto;grid-template-columns:1fr}#panel{border-left:0;border-top:1px solid var(--line)}}</style>
+  <script type="module" crossorigin src="./assets/main-DW_WTCzP.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="stage"><canvas id="view"></canvas><div id="hud"></div><div id="daycard"><span>На следующий день…</span></div></div>
+    <aside id="panel">
+      <div class="row" style="justify-content:space-between"><h1>Pixeldemo · герой</h1><a href="./viewer3d.html" style="color:var(--text);border:1px solid var(--line);border-radius:6px;padding:4px 10px;text-decoration:none;background:#2a2d35">3D ↗</a></div>
+      <section><h2>Сцена</h2><div class="row"><button id="theme-office">Офис</button><button id="theme-jungle">Руины v1</button><button id="theme-jungle2">Карьерная лестница</button></div></section>
+      <section><h2>Анимации</h2><div class="clips" id="clips"></div>
+        <div class="row" style="margin-top:6px"><button id="jump-dart" title="День героя: третий вызов, сцена с дартс">🎯 Сцена с дартс</button></div></section>
+      <section>
+        <h2>Воспроизведение</h2>
+        <div class="row">
+          <button id="prev" title="Кадр назад (←)">◀︎</button>
+          <button id="play" title="Пауза (пробел)">⏸</button>
+          <button id="next" title="Кадр вперёд (→)">▶︎</button>
+        </div>
+        <div style="margin-top:8px"><input type="range" id="scrub" min="0" max="1000" value="0" /></div>
+        <div class="row muted"><span id="time">0.00 с</span><span style="flex:1"></span><span id="seg"></span></div>
+        <div style="margin-top:8px" class="muted">Скорость: <span id="speedv">1×</span></div>
+        <input type="range" id="speed" min="0.05" max="2" step="0.05" value="1" />
+        <div style="margin-top:8px" class="muted">Приближение: <span id="zoomv">1×</span> <span style="float:right">колесо, перетаскивание</span></div>
+        <input type="range" id="zoom" min="1" max="5" step="0.1" value="1" />
+        <div class="row" style="margin-top:6px"><button id="resetview">Сбросить кадр</button></div>
+      </section>
+      <section><h2>Сегменты</h2><div id="segs"></div></section>
+      <section>
+        <h2>Показ</h2>
+        <label class="tg"><input type="checkbox" id="o-bones" /> Суставы</label>
+        <label class="tg"><input type="checkbox" id="o-background" checked /> Фон</label>
+        <label class="tg"><input type="checkbox" id="o-props" checked /> Мебель</label>
+        <label class="tg"><input type="checkbox" id="o-shadows" checked /> Тени</label>
+        <label class="tg"><input type="checkbox" id="o-tint" checked /> Тёплый свет</label>
+        <label class="tg"><input type="checkbox" id="o-fit" /> Вся сцена</label>
+      </section>
+      <section>
+        <h2>Вывод</h2>
+        <div class="row"><button id="rec">⏺ Записать видео</button></div>
+        <div class="row" style="margin-top:6px"><button id="shot">📷 Кадр PNG</button></div>
+        <div class="muted" style="margin-top:6px">Видео пишется в WebM с текущего клипа от начала до конца.</div>
+      </section>
+      <section class="muted">
+        <kbd>Пробел</kbd> пауза · <kbd>←</kbd><kbd>→</kbd> кадр · <kbd>1</kbd>…<kbd>0</kbd> клипы ·
+        <kbd>B</kbd> суставы · <kbd>F</kbd> вся сцена · <kbd>[</kbd><kbd>]</kbd> скорость
+      </section>
+    </aside>
+  </div>
+</body>
+</html>
