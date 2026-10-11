@@ -1,18 +1,17 @@
 # Nine to Nap
 
-*«Рабочий полдень»* — an ordinary day of a programmer in a typical office.
+*«Рабочий полдень»* — обычный день программиста в типичном офисе.
 
 **▶ https://chegleyev.github.io/nine-to-nap/**
 
 ![Nine to Nap](preview.png)
 
-## How it's made
+## Как сделано
 
-- **Engine.** Plain TypeScript and raw WebGL, with no game engine.
-- **Hero.** The hero is a 2D cut-out (skeletal) rig: rigid parts with round joints, narrow smooth bends at the knees and
-  hips, and separate drawings for a bent knee and for sitting.
-- **Movement.** Legs and arms are solved by two-bone IK. The floor walk follows curves taken from a motion-capture walk;
-  on the stairs, the feet are placed procedurally, one tread per step.
-- **Directing.** A small scene director sequences everything: camera moves, speech bubbles and background animation.
-- **Artwork.** The artwork was made with AI image generation, then cut into parts, registered and assembled by
-  hand-written tools.
+- **Движок.** Обычный TypeScript и WebGL, без игровых движков.
+- **Герой.** Двумерная перекладка со скелетом: жёсткие детали с круглыми шарнирами, узкие плавные сгибы в коленях и
+  бёдрах, отдельные рисунки согнутого колена и посадки.
+- **Движение.** Руки и ноги решаются обратной кинематикой на две кости. Ходьба по полу идёт по кривым из записи
+  motion capture, на лестнице стопы ставятся процедурно — по ступени на шаг.
+- **Режиссура.** Небольшой режиссёр сцены ведёт всё: камеру, реплики в облачках и оживление фона.
+- **Рисунки.** Арт сделан генерацией изображений, а затем нарезан на детали, совмещён и собран своими скриптами.
